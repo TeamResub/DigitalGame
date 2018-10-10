@@ -5,7 +5,7 @@ using UnityEngine;
 public class Placement : MonoBehaviour {
     public bool isPlacing;
     public GameObject tower;
-    public static List<GameObject> placedObjs;
+    public List<GameObject> placedObjs;
     public void Place(GameObject mtower)
     {
         if(GameObject.FindGameObjectWithTag("Placer") == null)
