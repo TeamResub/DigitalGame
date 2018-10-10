@@ -71,15 +71,12 @@ public class PlacementObj : MonoBehaviour {
             {
                 GameObject temp = Instantiate(TowerFinal, transform.position, transform.rotation);
                 placement.GetComponent<Placement>().placedObjs.Add(temp);
-                MoneySystem.Money -= TowerFinal.GetComponent<TowerScript>().price;
                 Destroy(gameObject);
 
             }
             else
             {
-                //DestroyPlacementObj();
                 m_ah.PlaySound(AudioHandler.m_soundTypes.DAMAGE);
-                print("NOT ENUF $$");
             }
 
         }

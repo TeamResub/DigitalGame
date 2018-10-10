@@ -12,8 +12,17 @@ public class Placement : MonoBehaviour {
      
         if (GameObject.FindGameObjectWithTag("Placer") == null)
         {
-            m_bPlayerPlacing = true;
-            Instantiate(mtower);
+            if(MoneySystem.Money >= mtower.GetComponent<PlacementObj>().TowerFinal.GetComponent<TowerScript>().price)
+            {
+                m_bPlayerPlacing = true;
+                Instantiate(mtower);
+                MoneySystem.Money -= mtower.GetComponent<PlacementObj>().TowerFinal.GetComponent<TowerScript>().price;
+            }
+            else
+            {
+                //play money fail noise
+            }
+            
         }
     }
 	// Use this for initialization
@@ -24,12 +33,5 @@ public class Placement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if(isPlacing)
-        //{
-        //    if(tower != null)
-        //    {
-        //        tower.transform.position = Input.mousePosition;
-        //    }
-        //}
 	}
 }

@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if (Vector3.Distance(transform.position, currentTarget.position) < 0.2f)
+        if (Vector3.Distance(transform.position, currentTarget.position) < 0.05f)
         {
             index++;
             if(index >= Parental.GetComponent<SpawnerController>().nodes.Count)
