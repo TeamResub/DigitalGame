@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1266505325097520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.3893666, y: 0.20375669, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4970346458654168}
   - {fileID: 4713261763557740}
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: []
   AttackSpeed: 0.5
+  price: 200
   Projectile: {fileID: 1250301326648546, guid: c5212b3be78e6614f8f7965500f9e5c6, type: 2}
 --- !u!212 &212494439857176502
 SpriteRenderer:

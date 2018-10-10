@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerScript : MonoBehaviour {
     public List<GameObject> targets;
     public float AttackSpeed;
+    public int price;
     private bool canAttack;
     public GameObject Projectile;
 	// Use this for initialization

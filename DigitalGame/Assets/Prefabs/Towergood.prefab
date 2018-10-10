@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 1476131770756790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.19, y: 3.87, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerFinal: {fileID: 1824566953651562, guid: 852dbfd35f595b04bb445d7ea2879ae0, type: 2}
+  good: {fileID: 0}
+  bad: {fileID: 0}
 --- !u!212 &212131827330812290
 SpriteRenderer:
   m_ObjectHideFlags: 1
