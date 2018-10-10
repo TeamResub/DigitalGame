@@ -19,6 +19,8 @@ public class AudioHandler : MonoBehaviour
 
     public void PlaySound(m_soundTypes _playType)
     {
+        if (!m_asHandle.isPlaying)
+        {
             switch (_playType)
             {
                 case m_soundTypes.DAMAGE:
@@ -42,7 +44,8 @@ public class AudioHandler : MonoBehaviour
                         break;
                     }
             }
-        m_asHandle.Play();
+            m_asHandle.Play();
+        }
     }
 	// Use this for initialization
 	void Start ()
