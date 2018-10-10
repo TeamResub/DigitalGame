@@ -7,6 +7,7 @@ public class PlacementObj : MonoBehaviour {
     public GameObject good;
     public GameObject bad;
     private GameObject placement;
+    public AudioHandler m_ah;
     private bool canPlace;
     private bool isPlacing;
 	// Use this for initialization
@@ -14,7 +15,7 @@ public class PlacementObj : MonoBehaviour {
         canPlace = true;
         placement = GameObject.FindGameObjectWithTag("Player");
         isPlacing = GameObject.FindGameObjectWithTag("Player").GetComponent<Placement>().isPlacing;
-
+        m_ah = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioHandler>();
     }
 
     private void DestroyPlacementObj()
@@ -76,8 +77,8 @@ public class PlacementObj : MonoBehaviour {
             }
             else
             {
-                gameObject.GetComponent<AudioSource>().Play();
-                DestroyPlacementObj();
+                //DestroyPlacementObj();
+                m_ah.PlaySound(AudioHandler.m_soundTypes.DAMAGE);
                 print("NOT ENUF $$");
             }
 
