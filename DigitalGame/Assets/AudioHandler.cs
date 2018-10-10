@@ -21,25 +21,26 @@ public class AudioHandler : MonoBehaviour
     {
         if (!m_asHandle.isPlaying)
         {
+            int _play;
             switch (_playType)
             {
                 case m_soundTypes.DAMAGE:
                     {
-                        int _play = Random.Range(0, m_lDamageSounds.Count);
+                        _play = Random.Range(0, m_lDamageSounds.Count);
                         m_asHandle.clip = m_lDamageSounds[_play];
                         break;
                     }
 
                 case m_soundTypes.SUCCESS:
                     {
-                        int _play = Random.Range(0, m_lSuccesfulSounds.Count);
+                        _play = Random.Range(0, m_lSuccesfulSounds.Count);
                         m_asHandle.clip = m_lSuccesfulSounds[_play];
                         break;
                     }
 
                 case m_soundTypes.FAILURE:
                     {
-                        int _play = Random.Range(0, m_lFailureSounds.Count);
+                        _play = Random.Range(0, m_lFailureSounds.Count);
                         m_asHandle.clip = m_lFailureSounds[_play];
                         break;
                     }
