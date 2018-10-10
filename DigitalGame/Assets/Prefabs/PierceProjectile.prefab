@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementspeed: 10
-  damage: 40
+  damage: 20
   isPierce: 1
 --- !u!114 &114576499102903698
 MonoBehaviour:
