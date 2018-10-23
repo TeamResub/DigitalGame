@@ -350,6 +350,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4375286968059320}
   - component: {fileID: 95510658843187742}
+  - component: {fileID: 64589611759888584}
+  - component: {fileID: 114253375122650134}
   m_Layer: 0
   m_Name: NPC1
   m_TagString: Untagged
@@ -1260,6 +1262,20 @@ Transform:
   m_Father: {fileID: 4525777361686312}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &64589611759888584
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553807914541524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: f8a1a48fa67ad32448543c090848c439, type: 3}
 --- !u!95 &95510658843187742
 Animator:
   serializedVersion: 3
@@ -1269,7 +1285,7 @@ Animator:
   m_GameObject: {fileID: 1553807914541524}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f8a1a48fa67ad32448543c090848c439, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b763a74d62092be4887d0125a548f86d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1278,6 +1294,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114253375122650134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553807914541524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c300159837791824e984c4a597ffd0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_iHealth: 0
+  m_eCurrentState: 0
 --- !u!137 &137596356234808492
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

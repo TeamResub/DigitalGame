@@ -20,6 +20,7 @@ public class NPCHandler : MonoBehaviour
     public m_eNPCState m_eCurrentState;
     private int m_iCheckPointCount;
     private float speed;
+    private GameObject m_goTarget; // need a target because on mass spawning using a formula to determine current target bugs the fuck out
 	// Use this for initialization
 	void Start ()
     {
@@ -48,7 +49,17 @@ public class NPCHandler : MonoBehaviour
             }
         }
         m_goNPCMainTask.Add(GameObject.FindGameObjectWithTag("CPF")); // finish
-        speed = 1.5f;
+
+
+        /***
+         * 
+         * make this speed val change by round or some bs..
+         * 
+         ***/
+        speed = Random.Range(0.3f, 2.0f);
+
+        // assign target
+        m_goTarget = m_goNPCMainTask[1];
     }
 	
 	// Update is called once per frame
@@ -67,6 +78,7 @@ public class NPCHandler : MonoBehaviour
                     }
                     else
                     {
+                        m_goTarget = m_goNPCMainTask[2];
                         m_eCurrentState = m_eNPCState.CP1;
                     }
                     break;
@@ -82,7 +94,16 @@ public class NPCHandler : MonoBehaviour
                         }
                         else
                         {
-                            m_eCurrentState = m_eNPCState.CP2;
+                            if (m_iCheckPointCount == 1)
+                            {
+                                m_eCurrentState = m_eNPCState.FINISH;
+                                m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
+                            }
+                            else
+                            {
+                                m_eCurrentState = m_eNPCState.CP2;
+                                m_goTarget = m_goNPCMainTask[3];
+                            }
                         }
                     }
                     //get to cp1
@@ -102,10 +123,12 @@ public class NPCHandler : MonoBehaviour
                             if (m_iCheckPointCount == 2)
                             {
                                 m_eCurrentState = m_eNPCState.FINISH;
+                                m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
                             }
                             else
                             {
                                 m_eCurrentState = m_eNPCState.CP3;
+                                m_goTarget = m_goNPCMainTask[4];
                             }
                         }
                     }
@@ -126,10 +149,12 @@ public class NPCHandler : MonoBehaviour
                             if (m_iCheckPointCount == 3)
                             {
                                 m_eCurrentState = m_eNPCState.FINISH;
+                                m_goTarget = m_goNPCMainTask[m_iCheckPointCount +1];
                             }
                             else
                             {
                                 m_eCurrentState = m_eNPCState.CP4;
+                                m_goTarget = m_goNPCMainTask[5];
                             }
                         }
                     }
@@ -147,6 +172,7 @@ public class NPCHandler : MonoBehaviour
                     {
                         m_eCurrentState = m_eNPCState.START;
                         gameObject.transform.position = m_goNPCMainTask[0].transform.position;
+                        m_goTarget = m_goNPCMainTask[1];
                     }
                     // head to finish.. restart and teleport to the start..
                     break;
@@ -156,6 +182,7 @@ public class NPCHandler : MonoBehaviour
         }
 
         // Make the NPC look at it's target...
-        this.transform.LookAt(m_goNPCMainTask[(int)m_eCurrentState+1].transform.position);
+        // this.transform.LookAt(m_goNPCMainTask[(int)m_eCurrentState+1].transform.position); // this bugs out when you have a mass amount of npcs spawned...
+        this.transform.LookAt(m_goTarget.transform.position);
     }
 }
