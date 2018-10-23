@@ -171,6 +171,7 @@ public class PlacerHandler : MonoBehaviour
                 case true:
                     {
                         m_bPlaceShit = false;
+                        Destroy(m_goPlacementDefault);
                         break;
                     }
                 case false:
