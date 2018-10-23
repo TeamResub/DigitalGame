@@ -6,7 +6,6 @@ public class EnemySpawner : MonoBehaviour
 {
     private List<GameObject> m_goEnemiesSpawned;
     public List<GameObject> m_goEnemiesToBeSpawned;
-    public GameObject m_goNPC1;
     [Header("The spawn amount = no. (m_goEnemiesToBeSpawned) * m_iSpawnAmt")]
     public int m_iSpawnAmount;
 	// Use this for initialization
@@ -20,17 +19,21 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int j = 0; j < m_iSpawnAmount; j++)
             {
-                //m_goEnemiesSpawned[j] = Instantiate(m_goEnemiesToBeSpawned[i], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                 GameObject _temp = Instantiate(m_goEnemiesToBeSpawned[i], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                 m_goEnemiesSpawned.Add(_temp);
             }
         }
-
+        print("[SPAWNED]: " + m_iSpawnAmount * m_goEnemiesToBeSpawned.Count + " enemies");
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+		/***
+         * 
+         * could do this so many ways.. check for when all of the unit's have 0 health, or reset by round because either way when all npcs have 0 health the round is ultimately
+         * restarting...
+         * 
+         ***/
 	}
 }

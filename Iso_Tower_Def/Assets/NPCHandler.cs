@@ -65,122 +65,125 @@ public class NPCHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        float step = speed * Time.deltaTime;
-        switch (m_eCurrentState)
+        if(m_iHealth > 0)
         {
-            case m_eNPCState.START:
-                {
-                    //get to cp1
-                    if (Vector3.Distance(m_goNPCMainTask[1].transform.position, gameObject.transform.position) > 0.0f)
+            float step = speed * Time.deltaTime;
+            switch (m_eCurrentState)
+            {
+                case m_eNPCState.START:
                     {
-
-                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[1].transform.position, step);
-                    }
-                    else
-                    {
-                        m_goTarget = m_goNPCMainTask[2];
-                        m_eCurrentState = m_eNPCState.CP1;
-                    }
-                    break;
-                }
-            case m_eNPCState.CP1:
-                {
-                    if (m_iCheckPointCount >= 1) // reach cp2
-                    {
-                        if (Vector3.Distance(m_goNPCMainTask[2].transform.position,gameObject.transform.position) > 0.0f)
+                        //get to cp1
+                        if (Vector3.Distance(m_goNPCMainTask[1].transform.position, gameObject.transform.position) > 0.0f)
                         {
 
-                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[2].transform.position, step);
+                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[1].transform.position, step);
                         }
                         else
                         {
-                            if (m_iCheckPointCount == 1)
+                            m_goTarget = m_goNPCMainTask[2];
+                            m_eCurrentState = m_eNPCState.CP1;
+                        }
+                        break;
+                    }
+                case m_eNPCState.CP1:
+                    {
+                        if (m_iCheckPointCount >= 1) // reach cp2
+                        {
+                            if (Vector3.Distance(m_goNPCMainTask[2].transform.position, gameObject.transform.position) > 0.0f)
                             {
-                                m_eCurrentState = m_eNPCState.FINISH;
-                                m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
+
+                                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[2].transform.position, step);
                             }
                             else
                             {
-                                m_eCurrentState = m_eNPCState.CP2;
-                                m_goTarget = m_goNPCMainTask[3];
+                                if (m_iCheckPointCount == 1)
+                                {
+                                    m_eCurrentState = m_eNPCState.FINISH;
+                                    m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
+                                }
+                                else
+                                {
+                                    m_eCurrentState = m_eNPCState.CP2;
+                                    m_goTarget = m_goNPCMainTask[3];
+                                }
                             }
                         }
+                        //get to cp1
+                        break;
                     }
-                    //get to cp1
-                    break;
-                }
-            case m_eNPCState.CP2:
-                {
-                    if (m_iCheckPointCount >= 2) // reach cp3
+                case m_eNPCState.CP2:
                     {
-                        if (Vector3.Distance(m_goNPCMainTask[3].transform.position, gameObject.transform.position) > 0.0f)
+                        if (m_iCheckPointCount >= 2) // reach cp3
+                        {
+                            if (Vector3.Distance(m_goNPCMainTask[3].transform.position, gameObject.transform.position) > 0.0f)
+                            {
+
+                                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[3].transform.position, step);
+                            }
+                            else
+                            {
+                                if (m_iCheckPointCount == 2)
+                                {
+                                    m_eCurrentState = m_eNPCState.FINISH;
+                                    m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
+                                }
+                                else
+                                {
+                                    m_eCurrentState = m_eNPCState.CP3;
+                                    m_goTarget = m_goNPCMainTask[4];
+                                }
+                            }
+                        }
+                        //get to cp1
+                        break;
+                    }
+                case m_eNPCState.CP3:
+                    {
+                        if (m_iCheckPointCount >= 3) // reach cp3
+                        {
+                            if (Vector3.Distance(m_goNPCMainTask[4].transform.position, gameObject.transform.position) > 0.0f)
+                            {
+
+                                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[4].transform.position, step);
+                            }
+                            else
+                            {
+                                if (m_iCheckPointCount == 3)
+                                {
+                                    m_eCurrentState = m_eNPCState.FINISH;
+                                    m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
+                                }
+                                else
+                                {
+                                    m_eCurrentState = m_eNPCState.CP4;
+                                    m_goTarget = m_goNPCMainTask[5];
+                                }
+                            }
+                        }
+                        //get to cp1
+                        break;
+                    }
+                case m_eNPCState.FINISH:
+                    {
+                        if (Vector3.Distance(m_goNPCMainTask[m_iCheckPointCount + 1].transform.position, gameObject.transform.position) > 0.0f)
                         {
 
-                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[3].transform.position, step);
+                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[m_iCheckPointCount + 1].transform.position, step);
                         }
                         else
                         {
-                            if (m_iCheckPointCount == 2)
-                            {
-                                m_eCurrentState = m_eNPCState.FINISH;
-                                m_goTarget = m_goNPCMainTask[m_iCheckPointCount + 1];
-                            }
-                            else
-                            {
-                                m_eCurrentState = m_eNPCState.CP3;
-                                m_goTarget = m_goNPCMainTask[4];
-                            }
+                            m_eCurrentState = m_eNPCState.START;
+                            gameObject.transform.position = m_goNPCMainTask[0].transform.position;
+                            m_goTarget = m_goNPCMainTask[1];
                         }
+                        // head to finish.. restart and teleport to the start..
+                        break;
                     }
-                    //get to cp1
+                default:
                     break;
-                }
-            case m_eNPCState.CP3:
-                {
-                    if (m_iCheckPointCount >= 3) // reach cp3
-                    {
-                        if (Vector3.Distance(m_goNPCMainTask[4].transform.position, gameObject.transform.position) > 0.0f)
-                        {
-
-                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[4].transform.position, step);
-                        }
-                        else
-                        {
-                            if (m_iCheckPointCount == 3)
-                            {
-                                m_eCurrentState = m_eNPCState.FINISH;
-                                m_goTarget = m_goNPCMainTask[m_iCheckPointCount +1];
-                            }
-                            else
-                            {
-                                m_eCurrentState = m_eNPCState.CP4;
-                                m_goTarget = m_goNPCMainTask[5];
-                            }
-                        }
-                    }
-                    //get to cp1
-                    break;
-                }
-            case m_eNPCState.FINISH:
-                {
-                    if (Vector3.Distance(m_goNPCMainTask[m_iCheckPointCount + 1].transform.position, gameObject.transform.position) > 0.0f)
-                    {
-
-                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_goNPCMainTask[m_iCheckPointCount + 1].transform.position, step);
-                    }
-                    else
-                    {
-                        m_eCurrentState = m_eNPCState.START;
-                        gameObject.transform.position = m_goNPCMainTask[0].transform.position;
-                        m_goTarget = m_goNPCMainTask[1];
-                    }
-                    // head to finish.. restart and teleport to the start..
-                    break;
-                }
-            default:
-                break;
+            }
         }
-
+      
         // Make the NPC look at it's target...
         // this.transform.LookAt(m_goNPCMainTask[(int)m_eCurrentState+1].transform.position); // this bugs out when you have a mass amount of npcs spawned...
         this.transform.LookAt(m_goTarget.transform.position);

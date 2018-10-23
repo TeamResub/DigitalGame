@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - CPS
+  - CP1
+  - CP2
+  - CP3
+  - CP4
+  - CPF
   layers:
   - Default
   - TransparentFX

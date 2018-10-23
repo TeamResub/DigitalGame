@@ -38,8 +38,6 @@ public class PlacerHandler : MonoBehaviour
     RaycastHit GenerateRayCast(float _fDistanceOfRay, bool _bUseLayermask)
     {
         RaycastHit _rh;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // Ray ray = Camera.main.ScreenPointToRay(m_vec2MouseCoords);
         print(Input.mousePosition);
         Ray ray;
         ray = m_cMainCam.ScreenPointToRay(Input.mousePosition);
@@ -122,7 +120,6 @@ public class PlacerHandler : MonoBehaviour
     {
         RaycastHit _rhCheck;
         _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, false);
-        print("CHECKIFPLACEMENTOK: RaycastHit point: " + _rhCheck.point);
         Vector3 pos = _rhCheck.point;
         pos.y = m_fPlacementHeightOffsetVar; // CHANGE THIS
 
@@ -130,32 +127,10 @@ public class PlacerHandler : MonoBehaviour
         if (!PlacementUnacceptable(pos)) // placement accepted
         {
             m_goPlacementDefault = Instantiate(m_goObjPlacementOk[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
-            /* if (m_bBadPlacement)
-             {
-                 Destroy(m_goPlacementDefault);
-                 m_goPlacementDefault = Instantiate(m_goObjPlacementOk[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
-                 m_bBadPlacement = false;
-             }
-             else
-             {
-                 m_goPlacementDefault.transform.position = pos;
-             }*/
-            // accepted
         }
         else
         {
             m_goPlacementDefault = Instantiate(m_goObjPlacementBad[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
-            /*if (!m_bBadPlacement)
-            {
-                Destroy(m_goPlacementDefault);
-                m_goPlacementDefault = Instantiate(m_goObjPlacementBad[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
-                m_bBadPlacement = true;
-            }
-            else
-            {
-                m_goPlacementDefault.transform.position = pos;
-            }*/
-            // unaccepted
         }
         
     }
@@ -191,9 +166,6 @@ public class PlacerHandler : MonoBehaviour
             {
                 m_vec2MouseCoords.x = Input.mousePosition.x;
                 m_vec2MouseCoords.y = Input.mousePosition.y;
-                print(m_vec2MouseCoords.x + ", " + m_vec2MouseCoords.y);
-                //  RaycastHit _rhCheck = GenerateRayCast(Camera.main.transform.position.y * 2, true);
-                //CheckIfPlacementIsOkay();
                 PlaceAnObject();
             }
 
