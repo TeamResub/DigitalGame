@@ -90,7 +90,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 100
-  movementspeed: 1
+  worth: 10
+  movementspeed: 3
+  Parental: {fileID: 0}
+  currentTarget: {fileID: 0}
 --- !u!212 &212087315227598980
 SpriteRenderer:
   m_ObjectHideFlags: 1

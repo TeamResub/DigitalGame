@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Placer
+  - node
+  - Spawner
+  - HQ
   layers:
   - Default
   - TransparentFX

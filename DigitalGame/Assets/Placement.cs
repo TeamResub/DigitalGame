@@ -5,29 +5,33 @@ using UnityEngine;
 public class Placement : MonoBehaviour {
     public bool isPlacing;
     public GameObject tower;
-    public static List<GameObject> placedObjs;
+    public List<GameObject> placedObjs;
+    public bool m_bPlayerPlacing;
     public void Place(GameObject mtower)
     {
-        if(GameObject.FindGameObjectWithTag("Placer") == null)
+     
+        if (GameObject.FindGameObjectWithTag("Placer") == null)
         {
-            Instantiate(mtower);
+            if(MoneySystem.Money >= mtower.GetComponent<PlacementObj>().TowerFinal.GetComponent<TowerScript>().price)
+            {
+                m_bPlayerPlacing = true;
+                Instantiate(mtower);
+                MoneySystem.Money -= mtower.GetComponent<PlacementObj>().TowerFinal.GetComponent<TowerScript>().price;
+            }
+            else
+            {
+                //play money fail noise
+            }
+            
         }
-        
     }
 	// Use this for initialization
 	void Start () {
         isPlacing = false;
-
+        m_bPlayerPlacing = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //if(isPlacing)
-        //{
-        //    if(tower != null)
-        //    {
-        //        tower.transform.position = Input.mousePosition;
-        //    }
-        //}
 	}
 }
