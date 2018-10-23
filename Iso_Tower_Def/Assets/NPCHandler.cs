@@ -57,7 +57,8 @@ public class NPCHandler : MonoBehaviour
          * 
          ***/
         speed = Random.Range(0.3f, 2.0f);
-        m_iHealth = (int)Random.Range(15.0f, 30.0f);
+        //m_iHealth = (int)Random.Range(15.0f, 30.0f);
+        m_iHealth = 100;
         // assign target
         m_goTarget = m_goNPCMainTask[1];
     }
@@ -183,9 +184,19 @@ public class NPCHandler : MonoBehaviour
                     break;
             }
         }
+        else
+        {
+            Destroy(gameObject);
+        }
       
         // Make the NPC look at it's target...
         // this.transform.LookAt(m_goNPCMainTask[(int)m_eCurrentState+1].transform.position); // this bugs out when you have a mass amount of npcs spawned...
         this.transform.LookAt(m_goTarget.transform.position);
     }
+    
+    public void EnemyShot(int damage)
+    {
+        m_iHealth -= damage;
+    }
+
 }
