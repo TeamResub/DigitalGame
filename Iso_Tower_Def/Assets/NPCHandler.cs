@@ -54,13 +54,12 @@ public class NPCHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        switch(m_eCurrentState)
+        float step = speed * Time.deltaTime;
+        switch (m_eCurrentState)
         {
             case m_eNPCState.START:
                 {
                     //get to cp1
-                    float step = speed * Time.deltaTime;
-                    print("Distance: " + Vector3.Distance(m_goNPCMainTask[1].transform.position, gameObject.transform.position));
                     if (Vector3.Distance(m_goNPCMainTask[1].transform.position, gameObject.transform.position) > 0.0f)
                     {
 
@@ -76,7 +75,6 @@ public class NPCHandler : MonoBehaviour
                 {
                     if (m_iCheckPointCount >= 1) // reach cp2
                     {
-                        float step = speed * Time.deltaTime;
                         if (Vector3.Distance(m_goNPCMainTask[2].transform.position,gameObject.transform.position) > 0.0f)
                         {
 
@@ -94,7 +92,6 @@ public class NPCHandler : MonoBehaviour
                 {
                     if (m_iCheckPointCount >= 2) // reach cp3
                     {
-                        float step = speed * Time.deltaTime;
                         if (Vector3.Distance(m_goNPCMainTask[3].transform.position, gameObject.transform.position) > 0.0f)
                         {
 
@@ -119,7 +116,6 @@ public class NPCHandler : MonoBehaviour
                 {
                     if (m_iCheckPointCount >= 3) // reach cp3
                     {
-                        float step = speed * Time.deltaTime;
                         if (Vector3.Distance(m_goNPCMainTask[4].transform.position, gameObject.transform.position) > 0.0f)
                         {
 
@@ -142,7 +138,6 @@ public class NPCHandler : MonoBehaviour
                 }
             case m_eNPCState.FINISH:
                 {
-                    float step = speed * Time.deltaTime;
                     if (Vector3.Distance(m_goNPCMainTask[m_iCheckPointCount + 1].transform.position, gameObject.transform.position) > 0.0f)
                     {
 
@@ -156,6 +151,11 @@ public class NPCHandler : MonoBehaviour
                     // head to finish.. restart and teleport to the start..
                     break;
                 }
+            default:
+                break;
         }
-	}
+
+        // Make the NPC look at it's target...
+        this.transform.LookAt(m_goNPCMainTask[(int)m_eCurrentState+1].transform.position);
+    }
 }
