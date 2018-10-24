@@ -57,8 +57,6 @@ public class NPCHandler : MonoBehaviour
          * 
          ***/
         speed = 1;
-        //m_iHealth = (int)Random.Range(15.0f, 30.0f);
-        m_iHealth = 100;
         // assign target
         m_goTarget = m_goNPCMainTask[1];
     }
