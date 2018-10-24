@@ -7,14 +7,14 @@ public class PlacerHandler : MonoBehaviour
 
     [Header("Kinky Bastard")]
     [Tooltip("Add all possible objects to this array - add them linearly to the following to arrays as well")]
-    public GameObject[] m_goPossibleObjects;
+    public List<GameObject> m_goPossibleObjects;
     [Tooltip("Possible objs displaying a transparent green mesh")]
-    public GameObject[] m_goObjPlacementOk;
+    public List<GameObject> m_goObjPlacementOk;
     [Tooltip("Possible objs displaying a transparent red mesh")]
-    public GameObject[] m_goObjPlacementBad;
+    public List<GameObject> m_goObjPlacementBad;
     public GameObject m_goPlacementDefault;
     public GameObject m_goCurrentlyPlacing;
-    public GameObject[] m_goParticleEffects; // 0 = building
+    public List<GameObject> m_goParticleEffects; // 0 = building
     public GameObject m_goSuccessfulBuild;
     public List<GameObject> m_goObjsPlaced;
     public int m_iObjsPlaced;
@@ -32,7 +32,7 @@ public class PlacerHandler : MonoBehaviour
     void Start ()
     {
         m_bPlaceShit = false;
-        m_fPlacementHeightOffsetVar = 4.6f;
+        m_fPlacementHeightOffsetVar = 0.0f;
     }
 
     RaycastHit GenerateRayCast(float _fDistanceOfRay, bool _bUseLayermask)
@@ -71,7 +71,7 @@ public class PlacerHandler : MonoBehaviour
     private void PlaceAnObject()
     {
         //RaycastHit _rhCheck = GenerateRayCast(Camera.main.transform.position.y * 2, true);
-        RaycastHit _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, false);
+        RaycastHit _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, true);
         Vector3 pos = _rhCheck.point;
         pos.y = m_fPlacementHeightOffsetVar;
         print("Place turret at: " + pos);
@@ -119,7 +119,7 @@ public class PlacerHandler : MonoBehaviour
     private void CheckIfPlacementIsOkay()
     {
         RaycastHit _rhCheck;
-        _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, false);
+        _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, true);
         Vector3 pos = _rhCheck.point;
         pos.y = m_fPlacementHeightOffsetVar; // CHANGE THIS
 
@@ -162,6 +162,24 @@ public class PlacerHandler : MonoBehaviour
 
         if (m_bPlaceShit)
         {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+            {
+                m_iCurrentlyPlacing++;
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+            {
+                m_iCurrentlyPlacing--;
+            }
+
+            if(m_iCurrentlyPlacing >= m_goPossibleObjects.Count)
+            {
+                m_iCurrentlyPlacing -= m_goPossibleObjects.Count;
+            }
+            if(m_iCurrentlyPlacing < 0)
+            {
+                m_iCurrentlyPlacing = m_goPossibleObjects.Count - Mathf.Abs(m_iCurrentlyPlacing);
+            }
+
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
                 m_vec2MouseCoords.x = Input.mousePosition.x;
@@ -174,6 +192,7 @@ public class PlacerHandler : MonoBehaviour
                 Destroy(m_goPlacementDefault);
                 CheckIfPlacementIsOkay();
             }
+
         }
 
       

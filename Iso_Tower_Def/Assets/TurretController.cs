@@ -90,7 +90,7 @@ public class TurretController : MonoBehaviour {
                                 if (Physics.Raycast(endofturret.position, rayDirection, out hit, 100, layermask))
                                 {
                                     Debug.DrawRay(endofturret.position, rayDirection, Color.yellow);
-                                    Debug.Log(hit.transform.name);
+                                    //Debug.Log(hit.transform.name);
                                     CheckHit(hit, rayDirection);
                                 }
                                 else

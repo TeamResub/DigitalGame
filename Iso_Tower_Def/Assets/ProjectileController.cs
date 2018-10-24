@@ -5,7 +5,8 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour {
     public float m_iMovementSpeed;
     public float m_iDamage;
-    public enum TurretType {RapidFire, AOE, Pierce};
+    public GameObject SlowObjectPREFAB;
+    public enum TurretType {RapidFire, Slow, Pierce};
     public TurretType type;
 	// Use this for initialization
 	void Start () {
@@ -19,8 +20,16 @@ public class ProjectileController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+
+        
+
         if(other.tag == "Enemy")
         {
+            if (type == TurretType.Slow)
+            {
+                Instantiate(SlowObjectPREFAB, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
             other.SendMessage("EnemyShot", m_iDamage);
 
             //spawn hit particle maybe

@@ -19,7 +19,7 @@ public class NPCHandler : MonoBehaviour
     };
     public m_eNPCState m_eCurrentState;
     private int m_iCheckPointCount;
-    private float speed;
+    public float speed;
     private GameObject m_goTarget; // need a target because on mass spawning using a formula to determine current target bugs the fuck out
 	// Use this for initialization
 	void Start ()
@@ -56,7 +56,7 @@ public class NPCHandler : MonoBehaviour
          * make this speed val change by round or some bs..
          * 
          ***/
-        speed = Random.Range(0.3f, 2.0f);
+        speed = 1;
         //m_iHealth = (int)Random.Range(15.0f, 30.0f);
         m_iHealth = 100;
         // assign target
