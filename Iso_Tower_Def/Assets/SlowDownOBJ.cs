@@ -10,7 +10,7 @@ public class SlowDownOBJ : MonoBehaviour {
         {
             if (hit.tag == "Enemy")
             {
-                hit.GetComponent<NPCHandler>().speed -= hit.GetComponent<NPCHandler>().speed/3;
+                hit.GetComponent<NPCHandler>().agent.speed -= hit.GetComponent<NPCHandler>().agent.speed/3;
             }
         }
     }

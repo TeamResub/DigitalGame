@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int j = 0; j < m_iSpawnAmount; j++)
             {
-                GameObject _temp = Instantiate(m_goEnemiesToBeSpawned[i], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                GameObject _temp = Instantiate(m_goEnemiesToBeSpawned[i], GameObject.FindGameObjectWithTag("CPS").transform.position, Quaternion.identity) as GameObject;
                 m_goEnemiesSpawned.Add(_temp);
                 yield return new WaitForSeconds(0.5f);
             }

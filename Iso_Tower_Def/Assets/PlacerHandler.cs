@@ -32,7 +32,7 @@ public class PlacerHandler : MonoBehaviour
     void Start ()
     {
         m_bPlaceShit = false;
-        m_fPlacementHeightOffsetVar = 0.0f;
+        m_fPlacementHeightOffsetVar = 8.9f;
     }
 
     RaycastHit GenerateRayCast(float _fDistanceOfRay, bool _bUseLayermask)
@@ -122,7 +122,7 @@ public class PlacerHandler : MonoBehaviour
         _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, true);
         Vector3 pos = _rhCheck.point;
         pos.y = m_fPlacementHeightOffsetVar; // CHANGE THIS
-
+         
 
         if (!PlacementUnacceptable(pos)) // placement accepted
         {
