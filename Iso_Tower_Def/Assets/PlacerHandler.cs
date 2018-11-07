@@ -77,12 +77,12 @@ public class PlacerHandler : MonoBehaviour
         print("Place turret at: " + pos);
         //pos = new Vector3(Mathf.Round(pos.x / 10) * 10, pos.y, Mathf.Round(pos.z / 10) * 10);
         int cost = m_goPossibleObjects[m_iCurrentlyPlacing].GetComponent<ExpenseHandler>().m_iCostToPlace;
-        print("Player Bank: " + gameObject.GetComponent<PlayerHandler>().m_iPlayerCash);
+        print("Player Bank: " + PlayerHandler.m_iPlayerCash);
         if (!PlacementUnacceptable(pos))
         {
-            if (gameObject.GetComponent<PlayerHandler>().m_iPlayerCash >= cost)
+            if (PlayerHandler.m_iPlayerCash >= cost)
             {
-                gameObject.GetComponent<PlayerHandler>().m_iPlayerCash -= cost;
+                PlayerHandler.m_iPlayerCash -= cost;
                 // m_goSuccessfulBuild = Instantiate(m_goParticleEffects[0], pos, m_goParticleEffects[0].transform.rotation) as GameObject;
                 m_goObjsPlaced.Add(Instantiate(m_goPossibleObjects[m_iCurrentlyPlacing], pos, Quaternion.identity));
                 m_goObjsPlaced[m_goObjsPlaced.Count - 1].transform.rotation = m_goPlacementDefault.transform.rotation;

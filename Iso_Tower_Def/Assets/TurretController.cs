@@ -18,17 +18,14 @@ public class TurretController : MonoBehaviour {
     public float f_TurretHealth;
     //public GameObject upgradeParticle;
     public List<GameObject> Targets;
-
-
+    
     void Start()
     {
         print(f_TurretHealth);
         myAIMode = eAIMode.Idle;
         turretCooldown = 0;
     }
-
-
-
+    
     void Update()
     {
         for (int i = 0; i < Targets.Count; i++)

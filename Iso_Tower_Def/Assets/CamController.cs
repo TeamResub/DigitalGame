@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
     public void rotateCam(string direction)
     {
         if(direction == "left")

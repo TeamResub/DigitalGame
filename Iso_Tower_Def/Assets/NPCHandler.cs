@@ -18,7 +18,8 @@ public class NPCHandler : MonoBehaviour
 	void Update ()
     {
         if(m_iHealth <= 0)
-        { 
+        {
+            PlayerHandler.m_iPlayerCash += 10;
             Destroy(gameObject);
         }
       

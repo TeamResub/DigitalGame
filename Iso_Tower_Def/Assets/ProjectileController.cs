@@ -8,10 +8,6 @@ public class ProjectileController : MonoBehaviour {
     public GameObject SlowObjectPREFAB;
     public enum TurretType {RapidFire, Slow, Pierce};
     public TurretType type;
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,9 +16,6 @@ public class ProjectileController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-
-        
-
         if(other.tag == "Enemy")
         {
             if (type == TurretType.Slow)

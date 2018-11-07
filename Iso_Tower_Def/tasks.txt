@@ -1,5 +1,4 @@
 add upgrade system
-add nav mesh instead of walking straight - lecturer said they look boring just walking in straight lines
 add money system
 start excel sheet to balance money income - enemy health - turret damage blah blah blah
 add HQ - make enemies take health away from hq when they touch it

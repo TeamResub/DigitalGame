@@ -19,16 +19,19 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    IEnumerator SpawnEnemy()
+    void SpawnEnemy()
     {
+        GameObject cps = GameObject.FindGameObjectWithTag("CPS");
         for (int i = 0; i < m_goEnemiesToBeSpawned.Count; i++)
         {
             for (int j = 0; j < m_iSpawnAmount; j++)
             {
-                GameObject _temp = Instantiate(m_goEnemiesToBeSpawned[i], GameObject.FindGameObjectWithTag("CPS").transform.position, Quaternion.identity) as GameObject;
+                Vector3 temp = new Vector3(cps.transform.position.x + (j * 10), 0, cps.transform.position.z);
+                GameObject _temp = Instantiate(m_goEnemiesToBeSpawned[i], temp, Quaternion.identity) as GameObject;
                 m_goEnemiesSpawned.Add(_temp);
-                yield return new WaitForSeconds(0.5f);
+                print("spawned at " + temp);
             }
+            cps.transform.position = new Vector3(cps.transform.position.x, cps.transform.position.y, -10 + cps.transform.position.z);
         }
         print("[SPAWNED]: " + m_iSpawnAmount * m_goEnemiesToBeSpawned.Count + " enemies");
     }
@@ -38,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     {
         g_iRounds++;
         m_iSpawnAmount += 1 + g_iRounds;
-        StartCoroutine(SpawnEnemy());
+        SpawnEnemy();
     }
 
 	// Update is called once per frame
