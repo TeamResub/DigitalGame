@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public static int g_iRounds;
-
+    public GameObject npc;
+    public float npcHealth;
     private List<GameObject> m_goEnemiesSpawned;
     public List<GameObject> m_goEnemiesToBeSpawned;
     [Header("The spawn amount = no. (m_goEnemiesToBeSpawned) * m_iSpawnAmt")]
@@ -15,33 +16,39 @@ public class EnemySpawner : MonoBehaviour
     {
         g_iRounds = 0;
         m_goEnemiesSpawned = new List<GameObject>();
+        npcHealth = 100;
         //StartCoroutine(SpawnEnemy());
     }
 
 
-    void SpawnEnemy()
+    IEnumerator SpawnEnemy()
     {
         GameObject cps = GameObject.FindGameObjectWithTag("CPS");
+        int num = 0;
         for (int i = 0; i < m_goEnemiesToBeSpawned.Count; i++)
         {
             for (int j = 0; j < m_iSpawnAmount; j++)
             {
-                Vector3 temp = new Vector3(cps.transform.position.x + (j * 10), 0, cps.transform.position.z);
+                Vector3 temp = new Vector3(cps.transform.position.x + (j * 20), 0, cps.transform.position.z);
                 GameObject _temp = Instantiate(m_goEnemiesToBeSpawned[i], temp, Quaternion.identity) as GameObject;
                 m_goEnemiesSpawned.Add(_temp);
                 print("spawned at " + temp);
             }
-            cps.transform.position = new Vector3(cps.transform.position.x, cps.transform.position.y, -10 + cps.transform.position.z);
+            //cps.transform.position = new Vector3(cps.transform.position.x, cps.transform.position.y, -10 + cps.transform.position.z);
+            //num += 1;
+            yield return new WaitForSeconds(3);
         }
         print("[SPAWNED]: " + m_iSpawnAmount * m_goEnemiesToBeSpawned.Count + " enemies");
+        // cps.transform.position = new Vector3(cps.transform.position.x, cps.transform.position.y, cps.transform.position.z + 10*num);
     }
 
 
     public void NextRound()
     {
         g_iRounds++;
-        m_iSpawnAmount += 1 + g_iRounds;
-        SpawnEnemy();
+        m_goEnemiesToBeSpawned.Add(npc);
+        npcHealth += g_iRounds * 10;
+        StartCoroutine(SpawnEnemy());
     }
 
 	// Update is called once per frame

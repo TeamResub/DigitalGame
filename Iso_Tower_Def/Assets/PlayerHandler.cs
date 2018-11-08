@@ -8,7 +8,7 @@ public class PlayerHandler : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        m_iPlayerCash = 5000;
+        m_iPlayerCash = 500;
 
     }
 }

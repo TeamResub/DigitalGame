@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 195380675395829644}
-  m_iHealth: 200
+  m_iHealth: 100
 --- !u!136 &136479082407969798
 CapsuleCollider:
   m_ObjectHideFlags: 1

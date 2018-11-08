@@ -18,12 +18,13 @@ public class TurretController : MonoBehaviour {
     public float f_TurretHealth;
     //public GameObject upgradeParticle;
     public List<GameObject> Targets;
-    
+    public int level;
     void Start()
     {
         print(f_TurretHealth);
         myAIMode = eAIMode.Idle;
         turretCooldown = 0;
+        level = 1;
     }
     
     void Update()
@@ -152,6 +153,13 @@ public class TurretController : MonoBehaviour {
     {
         f_TurretHealth -= damage;
         print(f_TurretHealth);
+    }
+    
+    
+    public void Upgrade()
+    {
+        fireRate -= fireRate / 3;
+        level += 1;
     }
 
     public void UpgradeTo(eTurretLevel lvl)

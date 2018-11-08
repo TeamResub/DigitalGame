@@ -5,13 +5,14 @@ using UnityEngine.AI;
 public class NPCHandler : MonoBehaviour
 {
     public NavMeshAgent agent;
-    public int m_iHealth;
+    public float m_iHealth;
     private GameObject end;
 	// Use this for initialization
 	void Start ()
     {
         end = GameObject.FindGameObjectWithTag("CPF");
         agent.SetDestination(end.transform.position);
+        m_iHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<EnemySpawner>().npcHealth;
     }
 	
 	// Update is called once per frame
@@ -19,7 +20,7 @@ public class NPCHandler : MonoBehaviour
     {
         if(m_iHealth <= 0)
         {
-            PlayerHandler.m_iPlayerCash += 10;
+            PlayerHandler.m_iPlayerCash += 2;
             Destroy(gameObject);
         }
       
@@ -29,5 +30,15 @@ public class NPCHandler : MonoBehaviour
     {
         m_iHealth -= damage;
     }
+
+    void OnTriggerEnter(Collider other)
+    { 
+        if(other.tag == "HQ")
+        {
+            hqScript.hqHealth -= 1;
+            Destroy(gameObject);
+        }
+    }
+
 
 }
