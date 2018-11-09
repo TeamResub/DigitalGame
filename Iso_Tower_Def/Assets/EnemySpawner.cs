@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,12 +12,15 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> m_goEnemiesToBeSpawned;
     [Header("The spawn amount = no. (m_goEnemiesToBeSpawned) * m_iSpawnAmt")]
     public int m_iSpawnAmount;
+    public Text m_tRoundTimer;
+    public float m_fSpawnTimer;
 	// Use this for initialization
 	void Start ()
     {
         g_iRounds = 0;
         m_goEnemiesSpawned = new List<GameObject>();
         npcHealth = 100;
+        m_fSpawnTimer = 15.0f;
         //StartCoroutine(SpawnEnemy());
     }
 
@@ -45,9 +49,14 @@ public class EnemySpawner : MonoBehaviour
 
     public void NextRound()
     {
+        if (g_iRounds != 0)
+        {
+            PlayerHandler.m_iPlayerCash += 15 * g_iRounds;
+        }
         g_iRounds++;
         m_goEnemiesToBeSpawned.Add(npc);
         npcHealth += g_iRounds * 10;
+        m_fSpawnTimer = 15.0f * g_iRounds;
         StartCoroutine(SpawnEnemy());
     }
 
@@ -66,16 +75,30 @@ public class EnemySpawner : MonoBehaviour
 
         if(m_goEnemiesSpawned.Count <= 0)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            // start counter
+            m_tRoundTimer.text = "Spawn Timer: " + m_fSpawnTimer;
+            if (m_fSpawnTimer < 0)
             {
+                print("SPAWN THE NPCS");
                 NextRound();
+                m_tRoundTimer.text = "Spawn Time: SPAWNED";
+            }
+            else
+            {
+                m_fSpawnTimer -= Time.deltaTime;
             }
         }
-		/***
+
+        if (m_goEnemiesSpawned.Count <= 0 && Input.GetKeyDown(KeyCode.Space))
+        {
+            NextRound();
+            m_tRoundTimer.text = "Spawn Time: SPAWNED";
+        }
+        /***
          * 
          * could do this so many ways.. check for when all of the unit's have 0 health, or reset by round because either way when all npcs have 0 health the round is ultimately
          * restarting...
          * 
          ***/
-	}
+    }
 }

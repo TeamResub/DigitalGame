@@ -38,7 +38,6 @@ public class PlacerHandler : MonoBehaviour
     RaycastHit GenerateRayCast(float _fDistanceOfRay, bool _bUseLayermask)
     {
         RaycastHit _rh;
-        print(Input.mousePosition);
         Ray ray;
         ray = m_cMainCam.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * _fDistanceOfRay, new Color(1f, 0.922f, 0.016f, 1f));
@@ -78,7 +77,7 @@ public class PlacerHandler : MonoBehaviour
         //pos = new Vector3(Mathf.Round(pos.x / 10) * 10, pos.y, Mathf.Round(pos.z / 10) * 10);
         int cost = m_goPossibleObjects[m_iCurrentlyPlacing].GetComponent<ExpenseHandler>().m_iCostToPlace;
         print("Player Bank: " + PlayerHandler.m_iPlayerCash);
-        if (!PlacementUnacceptable(pos))
+        if (!PlacementUnacceptable(pos) && _rhCheck.transform.tag == "Ground")
         {
             if (PlayerHandler.m_iPlayerCash >= cost)
             {
@@ -122,15 +121,19 @@ public class PlacerHandler : MonoBehaviour
         _rhCheck = GenerateRayCast(m_cMainCam.transform.position.y * 2, true);
         Vector3 pos = _rhCheck.point;
         pos.y = m_fPlacementHeightOffsetVar; // CHANGE THIS
-         
 
-        if (!PlacementUnacceptable(pos)) // placement accepted
+        //  if (!PlacementUnacceptable(pos)) // <--- this placement checking is by position/regional obj positoning only - not ground checking
+        if (_rhCheck.transform.tag == "Ground")
         {
-            m_goPlacementDefault = Instantiate(m_goObjPlacementOk[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
+            if (!PlacementUnacceptable(pos))
+            {
+                m_goPlacementDefault = Instantiate(m_goObjPlacementOk[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
+            }
         }
         else
         {
-            m_goPlacementDefault = Instantiate(m_goObjPlacementBad[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
+            print("UNACCEPTED");
+           // m_goPlacementDefault = Instantiate(m_goObjPlacementBad[m_iCurrentlyPlacing], pos, Quaternion.identity) as GameObject;
         }
         
     }

@@ -15,7 +15,18 @@ public class uiUpdater : MonoBehaviour {
 	void Update () {
         if (isHealth)
         {
-
+            if (hqScript.hqHealth < 25)
+            {
+                gameObject.GetComponent<Text>().color = Color.red;
+            }
+            else if (hqScript.hqHealth < 60)
+            {
+                gameObject.GetComponent<Text>().color = Color.yellow;
+            }
+            else
+            {
+                gameObject.GetComponent<Text>().color = Color.green;
+            }
             gameObject.GetComponent<Text>().text = hqScript.hqHealth.ToString();
         }
         else
